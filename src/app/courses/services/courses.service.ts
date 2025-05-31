@@ -10,12 +10,14 @@ import { environment } from 'src/environments/environment';
 })
 export class CoursesService {
 
+  private readonly baseUrl = '';//environment.apiUrl+'/';
+  //private readonly API = `${this.baseUrl}/api/courses`;
   private readonly API = 'api/courses';
 
   constructor(private httpClient: HttpClient) { }
 
   list()  {
-    return this.httpClient.get<Course[]>(this.API)
+    return this.httpClient.get<Course[]>(this.baseUrl+this.API)
     .pipe(
       first(),
       delay(1000),
@@ -25,6 +27,6 @@ export class CoursesService {
   }
 
   save(record: Course){
-    return this.httpClient.post<Course>(this.API, record);
+    return this.httpClient.post<Course>(this.baseUrl+this.API, record);
   }
 }
